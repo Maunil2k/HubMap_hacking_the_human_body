@@ -19,5 +19,5 @@ This was my first semantic segmentation competition and it was an amazing learni
    
    Dice coefficient = (X ∩ Y) / (X + Y)
    
-<img src="https://user-images.githubusercontent.com/51321172/195859655-7dcd30da-827e-4abd-bf8b-51bb762703ca.png" height="250" width="400" align = "left">
-<img src="https://user-images.githubusercontent.com/51321172/195866069-a5c3ccc3-0092-4485-95ce-ed598f1c7c9c.png" height="250" width="400">
+<img src="https://user-images.githubusercontent.com/51321172/195859655-7dcd30da-827e-4abd-bf8b-51bb762703ca.png" height="250" width="350" align = "left">
+<img src="https://user-images.githubusercontent.com/51321172/195866069-a5c3ccc3-0092-4485-95ce-ed598f1c7c9c.png" height="250" width="350">
