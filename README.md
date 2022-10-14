@@ -1,6 +1,6 @@
 # HuBMAP + HPA - Hacking the Human Body
 ### Segment multi-organ functional tissue units- My Solution
-<img src = "https://user-images.githubusercontent.com/51321172/195871522-cea7bd96-ef9c-4ec0-ae04-5df791f417ac.png" height="300" width="300" align="left">
+<img src = "https://user-images.githubusercontent.com/51321172/195871522-cea7bd96-ef9c-4ec0-ae04-5df791f417ac.png" height="250" width="250" align="left">
 In this competition, the aim was to identify and segment functional tissue units (FTUs) across five human organs by building models using a dataset of tissue section images, with the best submissions segmenting FTUs as accurately as possible. If successful, it would help accelerate the world’s understanding of the relationships between cell and tissue organization. With a better idea of the relationship of cells, researchers will have more insight into the function of cells that impact human health.<br /><br />
 This was my first semantic segmentation competition and it was an amazing learning opportunity, I tried several approaches, trying different combinations of models, data augmentations, data patches and loss functions. My final rank in this competition is 620/ 1175 teams. The competition was evaluated on mean dice coefficient metric. <br /><br /><br />
 
