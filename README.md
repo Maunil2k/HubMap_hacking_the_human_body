@@ -2,7 +2,7 @@
 ### Segment multi-organ functional tissue units- My Solution using tensorflow
 <img src = "https://user-images.githubusercontent.com/51321172/195871522-cea7bd96-ef9c-4ec0-ae04-5df791f417ac.png" height="250" width="250" align="left">
 In this competition, the aim was to identify and segment functional tissue units (FTUs) across five human organs by building models using a dataset of tissue section images, with the best submissions segmenting FTUs as accurately as possible. If successful, it would help accelerate the world’s understanding of the relationships between cell and tissue organization. With a better idea of the relationship of cells, researchers will have more insight into the function of cells that impact human health.<br /><br />
-This was my first semantic segmentation competition and it was an amazing learning opportunity, I tried several approaches, trying different combinations of models, data augmentations, data patches and loss functions. My final rank in this competition is 620/ 1175 teams. The competition was evaluated on mean dice coefficient metric. <br /><br />
+This was my first semantic segmentation competition and it was an amazing learning opportunity, I tried several approaches, trying different combinations of models, data augmentations, data patches and loss functions. My final rank in this competition is 620/ 1175 teams. The competition was evaluated on mean dice coefficient metric. <br />
 
 ## Important terminologies:
 1) Semantic segmentation: It is a computer vision algorithm that aims to classify each and every pixel of the input image to a particular class by generating a mask.
@@ -25,7 +25,7 @@ Instead of training the models from scratch, all of my approaches work on finetu
 1) The training process was extremely time-consuming and resource consuming, since the data pipeline for every new batch would split the image into tiles every single time.
 2) This inefficiency leads to a lot of memory consumption, hence, a model with large number of parameters cannot be used for finetuning.
 3) The model ended up performing poorly on the test set during submission. Possibly due to the fact that every batch had the patches belonging to the same image.
-Due to these reasons, it made no sense in trying different models to improve the public score.<br />
+Due to these reasons, it made no sense in trying different models to improve the public score.<br /><br />
 
 ## Approach 2:
 In this approach, I decided to focus on improving the efficiency of the data pipeline. Rather than using the patches, I scaled down the images and their corresponding masks(experimented with various sizes i.e. 256p, 384p, 480p, 512p and 768p and adjusting the batch sizes accordingly to avoid OOM error), applied data augmentations and finetuned two models FPN(Feature Pyramid Network) and U-Net trying different backbones for the encoder like resnet34, resnet50, EfficientNetB[0-7]. Interestingly, FPN gave much better results with EfficientNet backbones than UNet with the same backbones(My guess is that UNet probably failed to capture enough features like FPN did. FPN has pyramid type structure in encoder that helps it capture maximum features at different levels). On the similar lines, I experimented with two loss functions; bce_dice_loss and bce_jaccard_loss(IoU loss). The following combination gave the best public score: 
@@ -33,13 +33,13 @@ In this approach, I decided to focus on improving the efficiency of the data pip
 2) Model: FPN
 3) Backbone: EfficientNetB4
 4) Batch size: 12
-5) Loss: BCE Dice loss<br />
+5) Loss: BCE Dice loss<br /><br />
 
 ## Approach 3: 
-The 2nd approach outperformed its prior one almost in all the aspects, except the only problem with it was huge data loss since I scaled down large images to smaller sizes. To overcome this shortcoming, I created a new dataset out of the already existing one by generating 9 patches in the first attempt and 16 patches of the masks and images in the second. After the dataset was prepared, I used a very similar data pipeline as the one used in 2nd approach. Once again I tried several backbones, experimented different image size, batch sizes, etc. Unlike the first approach, the training loop took much lesser time and the memory management was much efficient. But unfortunately, none of them ever exceeded my previous public score.
+The 2nd approach outperformed its prior one almost in all the aspects, except the only problem with it was huge data loss since I scaled down large images to smaller sizes. To overcome this shortcoming, I created a new dataset out of the already existing one by generating 9 patches in the first attempt and 16 patches of the masks and images in the second. After the dataset was prepared, I used a very similar data pipeline as the one used in 2nd approach. Once again I tried several backbones, experimented different image size, batch sizes, etc. Unlike the first approach, the training loop took much lesser time and the memory management was much efficient. But unfortunately, none of them ever exceeded my previous public score.<br /><br />
 
 ## Final word:
-These methods are definitely not exhaustive. Infact, there are models that would give better results than FPN or UNet, for instance, SegFormer model. Find the solution of the third placeholder [here](https://www.kaggle.com/competitions/hubmap-organ-segmentation/discussion/354683) and [GitHub repo](https://github.com/VSydorskyy/hubmap_2022_htt_solution) for the same. 
+These methods are definitely not exhaustive. Infact, there are models that would give better results than FPN or UNet, for instance, SegFormer model. Find the solution of the third placeholder [here](https://www.kaggle.com/competitions/hubmap-organ-segmentation/discussion/354683) and [GitHub repo](https://github.com/VSydorskyy/hubmap_2022_htt_solution) for the same.<br /><br />
 
 ## References:
 1) Competition: [HuBMAP + HPA - Hacking the Human Body](https://www.kaggle.com/competitions/hubmap-organ-segmentation/overview)
