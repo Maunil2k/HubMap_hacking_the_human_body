@@ -27,6 +27,8 @@ Instead of training the models from scratch, all of my approaches work on finetu
 3) The model ended up performing poorly on the test set during submission. Possibly due to the fact that every batch had the patches belonging to the same image.
 Due to these reasons, it made no sense in trying different models to improve the public score.<br /><br />
 
+[Training Notebook](https://github.com/Maunil2k/HubMap_hacking_the_human_body/blob/master/Training%20approach%201.ipynb) | [Inference Notebook](https://github.com/Maunil2k/HubMap_hacking_the_human_body/blob/master/Inference%20approach%201.ipynb)<br />
+
 ## Approach 2:
 In this approach, I decided to focus on improving the efficiency of the data pipeline. Rather than using the patches, I scaled down the images and their corresponding masks(experimented with various sizes i.e. 256p, 384p, 480p, 512p and 768p and adjusting the batch sizes accordingly to avoid OOM error), applied data augmentations and finetuned two models FPN(Feature Pyramid Network) and U-Net trying different backbones for the encoder like resnet34, resnet50, EfficientNetB[0-7]. Interestingly, FPN gave much better results with EfficientNet backbones than UNet with the same backbones(My guess is that UNet probably failed to capture enough features like FPN did. FPN has pyramid type structure in encoder that helps it capture maximum features at different levels). On the similar lines, I experimented with two loss functions; bce_dice_loss and bce_jaccard_loss(IoU loss). The following combination gave the best public score: 
 1) Image size: 480p
@@ -35,8 +37,12 @@ In this approach, I decided to focus on improving the efficiency of the data pip
 4) Batch size: 12
 5) Loss: BCE Dice loss<br /><br />
 
+[Training Notebook](https://github.com/Maunil2k/HubMap_hacking_the_human_body/blob/master/Training%20approach%202.ipynb) | [Inference Notebook](https://github.com/Maunil2k/HubMap_hacking_the_human_body/blob/master/Inference%20approach%202.ipynb)<br />
+
 ## Approach 3: 
 The 2nd approach outperformed its prior one almost in all the aspects, except the only problem with it was huge data loss since I scaled down large images to smaller sizes. To overcome this shortcoming, I created a new dataset out of the already existing one by generating 9 patches in the first attempt and 16 patches of the masks and images in the second. After the dataset was prepared, I used a very similar data pipeline as the one used in 2nd approach. Once again I tried several backbones, experimented different image size, batch sizes, etc. Unlike the first approach, the training loop took much lesser time and the memory management was much efficient. But unfortunately, none of them ever exceeded my previous public score.<br /><br />
+
+[Training Notebook](https://github.com/Maunil2k/HubMap_hacking_the_human_body/blob/master/Training%20approach%203.ipynb) | [Inference Notebook](https://github.com/Maunil2k/HubMap_hacking_the_human_body/blob/master/Inference%20approach%203.ipynb)
 
 ## Final word:
 These methods are definitely not exhaustive. Infact, there are models that would give better results than FPN or UNet, for instance, SegFormer model. Find the solution of the third placeholder [here](https://www.kaggle.com/competitions/hubmap-organ-segmentation/discussion/354683) and [GitHub repo](https://github.com/VSydorskyy/hubmap_2022_htt_solution) for the same.<br /><br />
